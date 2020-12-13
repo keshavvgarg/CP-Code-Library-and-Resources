@@ -68,9 +68,12 @@ int main(){
     
     // the following code counts the number of elements whose value is x:
     
-    auto a = lower_bound(array, array+n, x);
-    auto b = upper_bound(array, array+n, x);
+    auto a = lower_bound(array, array+n, x); // O(n)
+    auto b = upper_bound(array, array+n, x); // O(n)
     cout << b-a << "\n";
+    
+    // for set don't use lower_bound(st.begin(),st.end(),x) // works in O(n)
+    // use st.lower_bound(x); // works in O(logn)
     
     // Using equal_range, the code becomes shorter:
     auto r = equal_range(array, array+n, x);
