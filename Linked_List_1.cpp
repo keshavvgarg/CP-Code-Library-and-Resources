@@ -36,9 +36,8 @@ int main(){
     Node* head = nullptr;
     
     // new creates an instance of struct Node and returns address to it (pointer to it)(address of Node);
-    Node* firstNode = new Node(x);
+    head = new Node(x);
     
-    head = firstNode; // address of firstNode is stored in head
     Node* tail = head;
     
     
@@ -47,9 +46,9 @@ int main(){
    programming language.
     */
     
-    // (*firstNode).data :: first we got the structure variable using dereferencing(*), then we access its data item
-    // firstNode -> data :: firstNode is pointer, if we want to access the data members of Node pointed by it
-    // (Node whose address is stored by pointer firstNode) we can use this. Cool, Isn't it ??
+    // (*head).data :: first we got the structure variable using dereferencing(*), then we access its data item
+    // head -> data :: head is pointer, if we want to access the data members of Node pointed by it
+    // (Node whose address is stored by pointer head) we can use this. Cool, Isn't it ??
 
     
     for(int i=1;i<=n-1;i++){ // loop runs n-1 times
