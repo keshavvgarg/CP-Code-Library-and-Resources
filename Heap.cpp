@@ -137,3 +137,14 @@ int main(){
     cout << h.getMin();
     return 0;  
 }
+
+// Now to make an array a maxheap we have to run max_heapify() from n/2 to 1. (because leaves are already max_heaps) and parent of largest leave is n/2 and all smaller leaves 
+// will have smaller value for their parents
+
+// https://www.youtube.com/watch?v=B7hVxCmfPtM&t=751s
+
+// Build max heap is O(n) and not O(nlogn)
+// Because as we get to upper nodes though the number of levels we might have to traverse per node increases by 1 but the number of nodes in that level decrease by a factor 2
+// If we take the sum of that series it becomes O(n) complexity
+
+// Heap Sort is O(nlogn)
