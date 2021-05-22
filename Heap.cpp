@@ -18,7 +18,7 @@ class MinHeap{
     MinHeap(int cap);
     
     // to heapify a subtree with the root at given index
-    void MinHeapify(int i);
+    void minHeapify(int i);
     
     // to get index of parent
     int parent(int i) { return (i - 1)/2; }
@@ -43,6 +43,8 @@ class MinHeap{
     
     // Insert a new key k
     void insertKey(int k);
+    
+    void heapSort();
 };
 
 MinHeap::MinHeap(int cap){
@@ -85,7 +87,7 @@ int MinHeap::extractMin(){ // O(logn)
     int root = arr[0];
     arr[0] = arr[size - 1];
     size--;
-    MinHeapify(0);
+    minHeapify(0);
     
     return root;
 }
@@ -102,7 +104,7 @@ void MinHeap::deleteKey(int i){
      // now we just have top heapify it i.e. settle it down
 }
 
-void MinHeap::MinHeapify(int i){
+void MinHeap::minHeapify(int i){
     // we have to swap with the smallest one
     // if it's already smaller than both then ok
 
@@ -118,23 +120,37 @@ void MinHeap::MinHeapify(int i){
     
     if(smallest_index != i){
        swap(arr[i], arr[smallest_index]);
-       MinHeapify(smallest_index);
+       minHeapify(smallest_index);
     } 
+}
+
+void MinHeap::heapSort(){ // O(nlogn)
+    // first we make it a heap
+    
+    for(int i = parent(size - 1); i >=0; i--){
+        minHeapify(i);
+    }
+
+    // We keep removing the top character
+    while(size > 0){
+       cout <<  extractMin() << "\n";
+    }
 }
 
 int main(){
     MinHeap h(11);
     h.insertKey(3);
     h.insertKey(2);
-    h.deleteKey(1);
+    h.deleteKey(1); // at index 1
     h.insertKey(15);
     h.insertKey(5);
     h.insertKey(4);
     h.insertKey(45);
-    cout << h.extractMin() << " ";
-    cout << h.getMin() << " ";
-    h.decreaseKey(2, 1);
-    cout << h.getMin();
+    h.heapSort();
+    // cout << h.extractMin() << " ";
+    // cout << h.getMin() << " ";
+    // h.decreaseKey(2, 1);
+    // cout << h.getMin();
     return 0;  
 }
 
@@ -148,3 +164,11 @@ int main(){
 // If we take the sum of that series it becomes O(n) complexity
 
 // Heap Sort is O(nlogn)
+
+// Heap sort is an in-place algorithm. 
+// Its typical implementation is not stable, but can be made stable
+
+// Some Sorting Algorithms are stable by nature, such as Bubble Sort, Insertion Sort, Merge Sort, Count Sort etc.
+// https://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf
+
+// STL also has a stable_sort() apart from sort() which is a bit slower
