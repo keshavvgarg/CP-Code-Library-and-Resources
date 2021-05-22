@@ -172,3 +172,7 @@ int main(){
 // https://www.cs.umd.edu/~meesh/351/mount/lectures/lect14-heapsort-analysis-part.pdf
 
 // STL also has a stable_sort() apart from sort() which is a bit slower
+
+// Max heap in STL: priority_queue<int> q;
+// Min heap in STL: priority_queue<int, vector<int>, greater<int>> q;
+// methods: q.top(); q.pop(); q.push(x); q.size(); q.empty();
