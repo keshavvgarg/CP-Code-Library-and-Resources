@@ -14,7 +14,7 @@ void buildtree(vector<int>& vect, int st, int ed, int v){
     }
     
     // else first build tree for left and right subtree then sum their values
-    int mid = (st+ed)/2;
+    int mid = st+ (ed - st)/2;
     buildtree(vect, st, mid, 2*v);
     buildtree(vect, mid+1, ed, 2*v+1);
     
@@ -28,7 +28,7 @@ void update(int v, int st, int ed, int pos, int new_val){
             return;
         }
         
-        int mid = (st + ed)/2;
+        int mid = st+ (ed - st)/2;
         if(pos<=mid){
             update(2*v,st,mid,pos,new_val);
         }
@@ -48,7 +48,7 @@ int sum(int u, int v, int st, int ed, int vertex){
         return segtree[vertex];
     }
     
-    int mid = (u + v)/2;
+    int mid = u + (v - u)/2;
     
     // Case2: If range completely lies inside any one of the two ranges
     if(u<=st && ed<=mid){
