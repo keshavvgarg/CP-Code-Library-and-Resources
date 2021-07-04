@@ -13,6 +13,8 @@ This simple modification of the operation already achieves the time complexity O
 There is a second modification, that will make it even faster.
 */
 
+
+// This is union by depth of the tree (more precisely, the upper bound on the tree depth, because the depth will get smaller when applying path compression).
 void make_set(int v){ // with union by rank optimization
     parent[v] = v;
     rank[v] = 0;
@@ -43,3 +45,21 @@ We will also not present a proof for this time complexity, since it is quite lon
 
 Also, it's worth mentioning that DSU with union by size / rank, but without path compression works in O(logn) time per query.
 */
+
+
+/* We can also do union sets by comparing the size of the trees */
+void make_set(int v) {
+    parent[v] = v;
+    size[v] = 1;
+}
+
+void union_sets(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b) {
+        if (size[a] < size[b])
+            swap(a, b);
+        parent[b] = a;
+        size[a] += size[b];
+    }
+}
