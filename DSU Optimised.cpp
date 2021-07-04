@@ -29,3 +29,17 @@ void union_sets(int a, int b){ // with union by rank optimization
         if (rank[a] == rank[b]) rank[a]++;
     }
 }
+
+/*
+As mentioned before, if we combine both optimizations - path compression with union by rank - we will reach nearly constant time queries. 
+It turns out, that the final amortized time complexity is O(α(n)), where α(n) is the inverse Ackermann function, which grows very slowly. 
+In fact it grows so slowly, that it doesn't exceed 4 for all reasonable n (approximately n<10^600).
+
+Amortized complexity is the total time per operation, evaluated over a sequence of multiple operations.
+The idea is to guarantee the total time of the entire sequence, while allowing single operations to be much slower then the amortized time.
+E.g. in our case a single call might take O(logn) in the worst case, but if we do m such calls back to back we will end up with an average time of O(α(n)).
+
+We will also not present a proof for this time complexity, since it is quite long and complicated.
+
+Also, it's worth mentioning that DSU with union by size / rank, but without path compression works in O(logn) time per query.
+*/
