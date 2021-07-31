@@ -108,3 +108,60 @@ Log(V) for the set operations
 6 5 10
 1
 */
+    
+    
+    
+    
+    
+ /* CSES Dijkstra code, directed graph, multiple edges */
+    
+#include<bits/stdc++.h>
+using namespace std;
+ 
+#define int long long
+ 
+void dijkstra(vector<vector<pair<int,int>>>& adj, vector<int>& dis){
+    set<pair<int,int>> st;
+    dis[1] = 0;
+    st.insert(make_pair(0, 1));
+    
+    while(!st.empty()){
+        int closest_node = (*st.begin()).second;
+        int dist = (*st.begin()).first;
+        
+        st.erase(st.begin());
+        dis[closest_node] = dist;
+        
+        for(pair<int,int> ele: adj[closest_node]){
+            if(dis[closest_node] + ele.second < dis[ele.first]){ // multiple edges handled
+                st.erase(make_pair(dis[ele.first], ele.first)); // if not present no problem
+                st.insert(make_pair(dis[closest_node] + ele.second, ele.first));
+                dis[ele.first] = dis[closest_node] + ele.second;
+            }
+        }
+    }
+}
+ 
+int32_t main(){
+    int n, m;
+    cin >> n >> m;
+    
+    vector<vector<pair<int,int>>> adj(n + 1);
+    vector<int> dis(n + 1, LONG_MAX);
+    
+    int u, v, x;
+    for(int i = 0; i < m; i++){
+        cin >> u >> v >> x;
+        adj[u].push_back(make_pair(v, x));
+    }
+    
+    dijkstra(adj, dis);
+    
+    for(int i = 1; i <= n; i++){
+        cout << dis[i] << " ";
+    }
+ 
+    cout << "\n";
+    
+    return 0;
+}
